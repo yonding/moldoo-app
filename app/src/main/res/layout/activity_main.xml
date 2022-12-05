@@ -13,6 +13,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="29dp" />
+
     <SeekBar
         android:id="@+id/setMinute"
         android:layout_width="match_parent"
@@ -58,12 +62,48 @@
 
     <Button
         android:id="@+id/btn_timer_start"
-        android:layout_width="wrap_content"
+        android:layout_width="105dp"
         android:layout_height="68dp"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:fontFamily="sans-serif-black"
         android:text="@string/timer_start"
         android:textSize="18sp"
         app:cornerRadius="50dp" />
+
+    <LinearLayout
+        android:layout_width="311dp"
+        android:layout_height="83dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_record"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:backgroundTint="#BCBCBC"
+            android:fontFamily="sans-serif-black"
+            android:text="기록"
+            android:textSize="18sp"
+            app:cornerRadius="50sp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_ranking"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:backgroundTint="#BBBBBB"
+            android:fontFamily="sans-serif-black"
+            android:text="순위"
+            android:textSize="18sp"
+            app:cornerRadius="50sp" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="17dp" />
+
 </LinearLayout>
 
