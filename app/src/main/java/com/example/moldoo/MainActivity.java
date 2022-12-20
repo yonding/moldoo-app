@@ -2,17 +2,27 @@ package com.example.moldoo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.sql.Time;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static long TOTAL_MOLDOO_TIME = 0;
 
     private static int MINUTE = 0;
     private static int SECOND = 0;
     private static int TIMER_LENGTH = 60;
+
     private TimerView mTimerView;
     private TextView mDurationView;
 
@@ -32,14 +42,34 @@ public class MainActivity extends AppCompatActivity {
                     mTimerView.start(TIMER_LENGTH);
                 } else {
                     timerStartButton.setText("시작");
+                    Toast.makeText(getApplicationContext(), secondsToTimeString(TOTAL_MOLDOO_TIME), Toast.LENGTH_SHORT).show();
                     mTimerView.stop();
                 }
             }
         });
 
+        final Button recordButton = (Button) findViewById(R.id.btn_record);
+        recordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent recordIntent = new Intent(getApplicationContext(), RecordActivity.class);
+                startActivity(recordIntent);
+            }
+        });
+
+        final Button rankButton = (Button) findViewById(R.id.btn_rank);
+        rankButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rankIntent = new Intent(getApplicationContext(), RankActivity.class);
+                startActivity(rankIntent);
+
+            }
+        });
+
         mDurationView = findViewById(R.id.durationView);
-        SeekBar mSetMinute = findViewById(R.id.setMinute);
-        SeekBar mSetSecond = findViewById(R.id.setSecond);
+        final SeekBar mSetMinute = findViewById(R.id.setMinute);
+        final SeekBar mSetSecond = findViewById(R.id.setSecond);
 
         mSetMinute.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -82,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 TIMER_LENGTH = MINUTE * 60 + SECOND;
             }
         });
+
     }
 
 
@@ -90,4 +121,16 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         mTimerView.stop();
     }
+
+    protected static String secondsToTimeString(long secs){
+        int seconds = (int) (secs % 60);
+        int minutes = (int) ((secs / 60) % 60);
+        int hours = (int) ((secs / 3600) % 24);
+        String secondsTxt = (seconds < 10 ? "0": "") + seconds;
+        String minutesTxt = (minutes < 10 ? "0" : "") + minutes;
+        String hoursTxt = (hours < 10 ? "0" : "") + hours;
+        return new String(hoursTxt + " : " + minutesTxt + " : " + secondsTxt );
+    }
+
 }
+

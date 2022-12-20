@@ -48,17 +48,17 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="60dp" />
+        android:layout_height="36dp" />
 
     <com.example.moldoo.TimerView
         android:id="@+id/timer"
-        android:layout_width="282dp"
-        android:layout_height="277dp"
+        android:layout_width="257dp"
+        android:layout_height="255dp"
         app:circleColor="@color/timer_circle" />
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="51dp" />
+        android:layout_height="28dp" />
 
     <Button
         android:id="@+id/btn_timer_start"
@@ -91,7 +91,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/btn_ranking"
+            android:id="@+id/btn_rank"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:backgroundTint="#BBBBBB"

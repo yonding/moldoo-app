@@ -1,5 +1,7 @@
 package com.example.moldoo;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,8 +13,10 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+import android.widget.Toast;
 
 import java.util.concurrent.TimeUnit;
 
@@ -96,8 +100,6 @@ public class TimerView extends View {
     }
 
     public void start(int secs) {
-
-
         mTimerAnimator = ValueAnimator.ofFloat(0f, 1f);
         mTimerAnimator.setDuration(TimeUnit.SECONDS.toMillis(secs));
         mTimerAnimator.setInterpolator(new LinearInterpolator());
@@ -105,6 +107,9 @@ public class TimerView extends View {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 drawProgress((float) animation.getAnimatedValue());
+                if((float) animation.getAnimatedValue() == 1.0) {
+                    MainActivity.TOTAL_MOLDOO_TIME += secs;
+                }
             }
         });
         mTimerAnimator.start();
